@@ -1,0 +1,37 @@
+Arguments: 
+  /usr/bin/node /usr/local/bin/yarn add bcrypt cloudinary cookie-parser concurrently cors dotenv express express-fileupload jsonwebtoken mongoose
+
+PATH: 
+  /home/hoffmann/.zinit/polaris/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/nodejs/:/mnt/c/Users/Hoffmann/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Hoffmann/AppData/Roaming/npm:/mnt/c/Users/Hoffmann/AppData/Local/Programs/Microsoft VS Code/bin
+
+Yarn version: 
+  1.22.10
+
+Node version: 
+  10.19.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: ENOENT: no such file or directory, copyfile '/home/hoffmann/.cache/yarn/v6/npm-rxjs-6.6.7-90ac018acabf491bf65044235d5863c4dab804c9-integrity/node_modules/rxjs/operator/auditTime.d.ts' -> '/mnt/d/projects/ecommerce-mern/node_modules/rxjs/operator/auditTime.d.ts'
+
+npm manifest: 
+  {
+    "name": "ecommerce-mern",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
