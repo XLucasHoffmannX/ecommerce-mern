@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from "react";
-import { GlobalState } from "../../../GlobalState";
+import { useContext, useState, useEffect } from 'react';
+import { GlobalState } from '../../../GlobalState';
 import axios from 'axios';
 import PaypalButton from './PayPalButton';
-import './cart.css';
+import './cart.css'
 
-const Cart = () => {
+function Cart() {
   const state = useContext(GlobalState);
   const [cart, setCart] = state.userAPI.cart;
   const [token] = state.token;
@@ -16,14 +16,16 @@ const Cart = () => {
         return prev + (item.price * item.quantity)
       }, 0)
 
-      setTotal(total);
+      setTotal(total)
     }
+
     getTotal()
+
   }, [cart])
 
-  const addToCart = async ()=>{
-    await axios.patch('/user/addcart', {cart},{
-      headers : {Authorization: token}
+  const addToCart = async (cart) => {
+    await axios.patch('/user/addcart', { cart }, {
+      headers: { Authorization: token }
     })
   }
 
@@ -34,8 +36,8 @@ const Cart = () => {
       }
     })
 
-    setCart([...cart]);
-    addToCart();
+    setCart([...cart])
+    addToCart(cart)
   }
 
   const decrement = (id) => {
@@ -45,51 +47,70 @@ const Cart = () => {
       }
     })
 
-    setCart([...cart]);
-    addToCart();
+    setCart([...cart])
+    addToCart(cart)
   }
 
   const removeProduct = id => {
-    if(window.confirm("Tem certeza que deseja reover esse item?")){
+    if (window.confirm("Deseja mesmo apagar esse item do carrinho?")) {
       cart.forEach((item, index) => {
-        if(item._id === id) cart.splice(index, 1)
+        if (item._id === id) {
+          cart.splice(index, 1)
+        }
       })
+
       setCart([...cart]);
-      addToCart();
+      addToCart(cart);
     }
   }
 
-  const tranSuccess = async (payment)=>{
-    console.log(payment)
+  const tranSuccess = async (payment) => {
+    const { paymentID, address } = payment;
+
+    await axios.post('/api/payment', { cart, paymentID, address }, {
+      headers: { Authorization: token }
+    })
+
+    setCart([]);
+    addToCart([]);
+    alert("Sucesso!");
   }
 
   if (cart.length === 0)
-    return <h2 style={{ textAlign: "center", fontSize: "2rem" }}>Seu carrinho está vazio!</h2>
+    return <h2 style={{ textAlign: "center", marginTop: "5rem", fontSize: "2rem" }}>Carrinho vazio</h2>
+
   return (
     <div>
       {
         cart.map(product => (
           <div className="detail cart" key={product._id}>
             <img src={product.images.url} alt="" />
+
             <div className="box-detail">
               <h2>{product.title}</h2>
+
               <h3>$ {product.price * product.quantity}</h3>
-              <p>{product.category}</p>
               <p>{product.description}</p>
               <p>{product.content}</p>
+
               <div className="amount">
                 <button onClick={() => decrement(product._id)}> - </button>
                 <span>{product.quantity}</span>
                 <button onClick={() => increment(product._id)}> + </button>
               </div>
-              <div className="delete" onClick={()=>{removeProduct(product._id)}}>X</div>
+
+              <div className="delete"
+                onClick={() => removeProduct(product._id)}>
+                X
+              </div>
             </div>
           </div>
         ))
       }
+
       <div className="total">
         <h3>Total: $ {total}</h3>
-        <PaypalButton 
+        <PaypalButton
           total={total}
           tranSuccess={tranSuccess}
         />

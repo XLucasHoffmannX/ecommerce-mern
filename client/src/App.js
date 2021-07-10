@@ -3,7 +3,6 @@ import { DataProvider } from './GlobalState';
 import Header from './components/headers/Header';
 import MainPages from './components/mainPages/Pages';
 
-
 function App() {
   return (
     <DataProvider>

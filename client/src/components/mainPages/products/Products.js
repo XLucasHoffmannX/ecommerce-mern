@@ -9,8 +9,6 @@ const Products = () => {
   const [products] = state.productsAPI.products
   const [isAdmin] = state.userAPI.isAdmin;
 
-  console.log(products)
-
   return (
     <>
       <div className="products">

@@ -32,23 +32,22 @@ export default class PaypalButton extends React.Component {
             sandbox: 'AVmJa8oGEiZtmltTD3j0-YJ5T4hm3OFDjjxzJga2iFFY_Agmdx8uuKgHw6e6oT1ItdRa-4f_LuYeoAaH',
             production: 'YOUR-PRODUCTION-APP-ID',
         }
-        // In order to get production's app-ID, you will have to send your app to Paypal for approval first
-        // For sandbox app-ID (after logging into your developer account, please locate the "REST API apps" section, click "Create App"):
-        //   => https://developer.paypal.com/docs/classic/lifecycle/sb_credentials/
-        // For production app-ID:
-        //   => https://developer.paypal.com/docs/classic/lifecycle/goingLive/
 
-        // NB. You can also have many Paypal express checkout buttons on page, just pass in the correct amount and they will work!
         let style = {
-            size: "small",
-            color: "blue",
-            shape: "rect",
-            label: "checkout",
+            size: 'small',
+            color: 'blue',
+            shape: 'rect',
+            label: 'checkout',
             tagline: false
         }
 
         return (
-            <PaypalExpressBtn env={env} client={client} currency={currency} total={total} onError={onError} onSuccess={onSuccess} onCancel={onCancel} style={style} />
+            <PaypalExpressBtn
+                env={env} client={client}
+                currency={currency}
+                total={total} onError={onError}
+                onSuccess={onSuccess} onCancel={onCancel}
+                style={style} />
         );
     }
 }

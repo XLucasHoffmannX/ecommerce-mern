@@ -4,7 +4,8 @@ import axios from 'axios';
 const UserAPI = (token) => {
   const [isLogged, setIsLogged] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [cart, setCart] = useState([])
+  const [cart, setCart] = useState([]);
+  const [history, setHistory] = useState([]);
 
   useEffect(() => {
     if (token) {
@@ -23,6 +24,8 @@ const UserAPI = (token) => {
       getUser();
     }
   }, [token])
+
+  
 
   const addCart = async (product) => {
     if (!isLogged) return alert("Por favor realizar o login!")
@@ -46,7 +49,8 @@ const UserAPI = (token) => {
     isLogged: [isLogged, setIsLogged],
     isAdmin: [isAdmin, setIsAdmin],
     cart: [cart, setCart],
-    addCart: addCart
+    addCart: addCart,
+    history: [history, setHistory]
   }
 }
 
