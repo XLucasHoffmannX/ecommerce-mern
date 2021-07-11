@@ -14,18 +14,23 @@ const UserAPI = (token) => {
           const res = await axios.get('/user/infor', {
             headers: { Authorization: token }
           })
+
           setIsLogged(true)
           res.data.role === 1 ? setIsAdmin(true) : setIsAdmin(false)
 
-          setCart(res.data.cart);
-        } catch (err) { alert(err.response.data.msg) }
+          setCart(res.data.cart)
+
+        } catch (err) {
+          alert(err.response.data.msg)
+        }
       }
 
-      getUser();
+      getUser()
+
     }
   }, [token])
 
-  
+
 
   const addCart = async (product) => {
     if (!isLogged) return alert("Por favor realizar o login!")

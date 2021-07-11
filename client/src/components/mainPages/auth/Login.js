@@ -3,29 +3,31 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './login.css';
 
-const Login = ()=>{
-  const [ user, setUser ] = useState({
+const Login = () => {
+  const [user, setUser] = useState({
     email: '', password: ''
   })
 
-  const onChangeInput = e =>{
+  const onChangeInput = e => {
     const { name, value } = e.target
-    setUser({ ...user, [name]:value })
+    setUser({ ...user, [name]: value })
     console.log(name, value)
   }
 
-  const loginSubmit = async e =>{
-    e.preventDefault();
+  const loginSubmit = async e => {
+    e.preventDefault()
     try {
-      await axios.post('/user/login', {...user});
+      await axios.post('/user/login', { ...user })
 
-      localStorage.setItem('firstLogin', true);
-      
+      localStorage.setItem('firstLogin', true)
+
       window.location.href = "/";
-    } catch (error) { alert( error.response.data.msg ) }
+    } catch (err) {
+      alert(err.response.data.msg)
+    }
   }
 
-  return(
+  return (
     <div className="login-page">
       <form onSubmit={loginSubmit}>
         <h2>Login</h2>

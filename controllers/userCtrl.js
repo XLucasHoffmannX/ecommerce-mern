@@ -34,7 +34,8 @@ const userCtrl = {
 
       res.cookie('refreshtoken', refreshtoken, {
         httpOnly: true,
-        path: '/user/refresh_token'
+        path: '/user/refresh_token',
+        maxAge: 7 * 24 * 60 * 60 * 1000 // 7d
       })
 
       res.json({ accesstoken })
@@ -57,7 +58,8 @@ const userCtrl = {
 
       res.cookie('refreshtoken', refreshtoken, {
         httpOnly: true,
-        path: '/user/refresh_token'
+        path: '/user/refresh_token',
+        maxAge: 7 * 24 * 60 * 60 * 1000 // 7d
       })
 
       res.json({ accesstoken })
@@ -106,10 +108,10 @@ const userCtrl = {
     } catch (err) {
       return res.status(500).json({ msg: err.message })
     }
-  }, 
-  history: async(req, res)=>{
+  },
+  history: async (req, res) => {
     try {
-      const history = await Payments.find({user_id: req.user.id});
+      const history = await Payments.find({ user_id: req.user.id });
 
       res.json(history)
     } catch (err) {
@@ -124,7 +126,7 @@ const createAccessToken = (user) => {
 }
 
 const createRefreshToken = (user) => {
-  return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '1d' })
+  return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d' })
 }
 
 module.exports = userCtrl;
