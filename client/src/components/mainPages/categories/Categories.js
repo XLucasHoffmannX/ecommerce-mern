@@ -12,6 +12,8 @@ const Categories = () => {
   const [onEdit, setOnEdit] = useState(false);
   const [id, setID] = useState('');
 
+  console.log(categories)
+
   const createCategory = async e => {
     e.preventDefault();
     try {
@@ -51,7 +53,7 @@ const Categories = () => {
       alert(err.res.data.msg)
     }
   }
-
+  console.log(categories)
   return (
     <div className="categories">
       <form onSubmit={createCategory}>

@@ -120,7 +120,7 @@ const userCtrl = {
 
 // tokens 
 const createAccessToken = (user) => {
-  return jwt.sign(user, process.env.ACESS_TOKEN_SECRET, { expiresIn: '17s' })
+  return jwt.sign(user, process.env.ACESS_TOKEN_SECRET, { expiresIn: '11m' })
 }
 
 const createRefreshToken = (user) => {

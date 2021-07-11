@@ -1,22 +1,26 @@
 import { useState } from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import './login.css'
 
 function Register() {
     const [user, setUser] = useState({
-        name:'', email:'', password: ''
+        name: '', email: '', password: ''
     })
 
-    const onChangeInput = e =>{
-        const {name, value} = e.target;
-        setUser({...user, [name]:value})
+    const onChangeInput = e => {
+        const { name, value } = e.target;
+        setUser({ ...user, [name]: value })
     }
 
-    const registerSubmit = async e =>{
+    const registerSubmit = async e => {
         e.preventDefault()
         try {
-            await axios.post('/user/register', {...user});
+            await axios.post('/user/register', { ...user });
+
+            localStorage.setItem('firstLogin', true);
+
+
             window.location.href = "/";
         } catch (err) {
             alert(err.response.data.msg)
@@ -28,13 +32,13 @@ function Register() {
             <form onSubmit={registerSubmit}>
                 <h2>Cadastro</h2>
                 <input type="text" name="name" required
-                placeholder="Nome de Usuário" value={user.name} onChange={onChangeInput} />
+                    placeholder="Nome de Usuário" value={user.name} onChange={onChangeInput} />
 
                 <input type="email" name="email" required
-                placeholder="Email" value={user.email} onChange={onChangeInput} />
+                    placeholder="Email" value={user.email} onChange={onChangeInput} />
 
                 <input type="password" name="password" required autoComplete="on"
-                placeholder="Senha" value={user.password} onChange={onChangeInput} />
+                    placeholder="Senha" value={user.password} onChange={onChangeInput} />
 
                 <div className="row">
                     <button type="submit">Register</button>
