@@ -1,18 +1,23 @@
-import BtnRender from './BtnRender';
+import BtnRender from './BtnRender'
 
-const ProductItem = ({product, isAdmin})=>{
-  return(
+function ProductItem({ product, isAdmin, deleteProduct, handleCheck }) {
+
+  return (
     <div className="product_card">
       {
-        isAdmin && <input type="checkbox" checked={product.checked}/>
+        isAdmin && <input type="checkbox" checked={product.checked}
+          onChange={() => handleCheck(product._id)} />
       }
-      <img src={product.images.url} alt=""/>
+      <img src={product.images.url} alt="" />
+
       <div className="product_box">
         <h2 title={product.title}>{product.title}</h2>
-        <span>R$ {product.price}</span>
+        <span>${product.price}</span>
         <p>{product.description}</p>
       </div>
-      <BtnRender product={product}/>
+
+
+      <BtnRender product={product} deleteProduct={deleteProduct} />
     </div>
   )
 }

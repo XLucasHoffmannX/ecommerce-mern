@@ -30,6 +30,8 @@ const CreateProduct = () => {
 
   const [products] = state.productsAPI.products
   const [onEdit, setOnEdit] = useState(false);
+  const [callback, setCallback] = state.productsAPI.callback;
+
   useEffect(() => {
     if (param.id) {
       products.forEach(product => {
@@ -110,8 +112,7 @@ const CreateProduct = () => {
         })
       }
 
-      setImages(false);
-      setProduct(initialState);
+      setCallback(!callback);
       history.push("/");
     } catch (error) {
       alert(error.response.message);
