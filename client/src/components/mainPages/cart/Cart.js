@@ -71,6 +71,12 @@ function Cart() {
       headers: { Authorization: token }
     })
 
+    if(payment){
+      const number = "42988112334";
+      const message = `Pedido : Endereço: ${address.city}, ${address.line1}, ${address.line1};\n\nNome do Comprador: ${address.recipient_name}`
+      await axios.post('/api/messageSubmit', {number, message})
+    }
+
     setCart([]);
     addToCart([]);
     alert("Sucesso!");
